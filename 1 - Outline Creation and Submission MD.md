@@ -84,12 +84,12 @@ The next step is to select a point on the floorplan image, and tell QGIS where t
 - This will then let you select a corresponding point on the map in QGIS
 - Left click the location on the map that matches the point you’ve just selected
 
-<img src="/images/tutorial/georeference_side_by_side.png">
+<img src="/images/tutorial/georef_comparison_1.png">
 
 - Repeat this process for a handful of points on the building perimeter
 - Try to pick points that are clearly visible on the map (e.g. building corners) and, where appropriate, spread the points out as far as possible from one another
 
-![Full Georeference Points](images/tutorial/georef_comparison.png)
+<img src="/images/tutorial/georef_comparison_2.png">
 
 - Inaccurately placed georeference points can lead to distortion of the map, meaning that walls can be the wrong length, or at incorrect angles
 - Additionally, each time a point is added, it has potential to skew the floorplan's appearance when it's overlaid on the map
@@ -105,7 +105,7 @@ The next step is to select a point on the floorplan image, and tell QGIS where t
 - Click the *Start Georeferencing* button
 - After a short amount of time, the transformed image should open in the QGIS main scene view.
 
-![Georeferenced image](images/tutorial/georef_finished.jpg)
+<img src="/images/tutorial/georef_finished.png">
 
 - Now that this image has been completed and saved out to a file, you can re-use it in another QGIS project, if needed, by just dragging the georeferenced .tiff file into QGIS
 - In the QGIS *Layers* panel (found to the left of the main map window by default), locate the raster layer that has just been added. *Right click > Properties > Transparency* will allow the editing of the floorplan transparency and let you see the underlying map to make sure that the floorplan image is correctly aligned.
