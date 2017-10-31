@@ -69,13 +69,13 @@ Performing this step will allow you to view your floor plan image in QGIS with t
   - This CRS also allows us to use the *advanced digitization tools* that will be covered in the [Creating An Indoor Map Level](#create-indoor-map-level) section below
 - Open the Georeferencer (*Raster > Georeferencer > Georeferencer...*)
 
-![Georeferencer toolbar](/images/tutorial/georeferencing_toolbar.png)
+<img src="/images/tutorial/georeferencing_toolbar.png" width="400">
 
 - Click “Add Raster”
 - Select your floor plan image
 - The image should be displayed in the Georeferencer window
 
-[<img src="/images/tutorial/georeference_plan_thumb.png">](/images/tutorial/georeference_plan.png)
+<img src="/images/tutorial/georeference_plan_thumb.png">
 
 The next step is to select a point on the floorplan image, and tell QGIS where that point is placed in the world
  
@@ -84,7 +84,7 @@ The next step is to select a point on the floorplan image, and tell QGIS where t
 - This will then let you select a corresponding point on the map in QGIS
 - Left click the location on the map that matches the point you’ve just selected
 
-![Point in Georeferencer](images/tutorial/georeference_side_by_side.png)
+<img src="/images/tutorial/georeference_side_by_side.png">
 
 - Repeat this process for a handful of points on the building perimeter
 - Try to pick points that are clearly visible on the map (e.g. building corners) and, where appropriate, spread the points out as far as possible from one another
@@ -155,7 +155,7 @@ With your scratch layer set up, you can begin to draw the guide lines for your o
 Your first line is going to be your "base line" - i.e. the source line for keeping your walls and rooms parallel and perpendicular to one another - so having it be along one of your larger walls is usually the best approach.
 
 As with your georeference, it's usually a good idea to start from a corner, and aim for another adjacent corner. For example, in our Westport House trace, the first line we used was the following:
-![Base Line Drawn](/images/tutorial/outline_drawing_1.png)
+<img src="/images/tutorial/outline_drawing_1.png" width="400" />
 
 Thanks to the snapping tools, you'll now be able to correctly connect your next line to your base line.
 As you can see in the following image, the pink "+" denotes where your new line will connect to the current, with a slightly stronger affinity for the ends.
@@ -170,10 +170,10 @@ The button just next to *Perpendicular* is *Parallel* and will, as you might exp
 ![Parallel Outline Edge](/images/tutorial/outline_parallel_video.mp4)
 
 Using the perpendicular digitizing tool to draw our next line leaves us looking something like this:
-![Base Line Drawn](/images/tutorial/outline_drawing_2.png)
+<img src="/images/tutorial/outline_drawing_2.png" width="400" />
 
 With all of this in mind, completing most of the outline for Westport House looks something like this:
-![Outline Majority Complete](/images/tutorial/outline_drawing_3.png)
+<img src="/images/tutorial/outline_drawing_3.png" width="400" />
 
 ---
 
@@ -181,28 +181,27 @@ As you can see, there's a small section to the bottom right - the curved balcony
 We'll cover how to draw curves and circles now.
 
 The way that QGIS draws a circle, or the arc of a circle, is by placing three points, and drawing the arc which would connect all three of these points. Shown in the following examples:
-![Arc Generation](/images/tutorial/points_and_curves.png)
+<img src="/images/tutorial/points_and_curves.png" width="400" />
 
 To create a full circle, you only need two points: your start point, and its antipodal point (i.e. the diametric opposite of the start point). From here, your "third point" is the start point again. This closes the circle.
 ![Circle Generation](/images/tutorial/full_circle_generation.mp4)
 
 In the case of Westport House, the floorplan contains a guide showing the centre of the circle. This can be confirmed with the digitizing tools, as we can see the length of the lines (the _d_ field) from centre to edge are equal:
-![Balcony Floorplan](/images/tutorial/outline_drawing_4.png) 
-![Curve Distances](/images/tutorial/curve_distances.png)
+<img src="/images/tutorial/outline_drawing_4.png" width="400" /> <img src="/images/tutorial/curve_distances.png" width="400" />
 
 This means that we can generate a third point, the same distance from the centre, and use that to generate an arc or a full circle.
 In the case of our example, we've generated a full circle:
-![Balcony Circle](/images/tutorial/outline_drawing_5.png)
+<img src="/images/tutorial/outline_drawing_5.png" width="400" />
 
 The initial output of this arc is very detailed - the whole circle in our example is 362 verts.
-![So Much Detail](/images/tutorial/outline_drawing_6.png)
+<img src="/images/tutorial/outline_drawing_6.png" width="400" />
 
 While this level of detail might be desired by some, it's overkill for most circumstances. To remedy this, we can use the *Simplify Feature* tool to reduce the vert count to something more manageable.
-![So Much Detail](/images/tutorial/buttons/simplify_feature.png)
+<img src="/images/tutorial/buttons/simplify_feature.png" />
 
-Simply toggle the tool on, then select the feature that you would like to simplify. The popup window will let you see the before and after of your vert count, and allow you to adjust according to taste.
+Simply toggle the tool on, then select the feature that you would like to simplify. The popup window will let you see the before and after of the feature's vert count, and allow you to adjust according to taste.
 In this example, we're going to use a value of *0.05* - taking us from 362 verts, to 65.
-![That's Better](/images/tutorial/outline_drawing_7.png)
+<img src="/images/tutorial/outline_drawing_7.png" width="400" />
 
 ---
 
