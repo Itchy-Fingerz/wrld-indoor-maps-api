@@ -172,6 +172,7 @@ The button just next to *Perpendicular* is *Parallel* and will, as you might exp
 <img src="/images/tutorial/outline_parallel_gif.gif" width=400>
 
 Using the perpendicular digitizing tool to draw our next line leaves us looking something like this:
+
 <img src="/images/tutorial/outline_drawing_2.png" width="400">
 
 With all of this in mind, completing _most_ of the outline for Westport House looks something like this:
@@ -183,22 +184,29 @@ As you can see, there's a section to the bottom right - the curved balcony - tha
 We'll cover how to draw curves and circles now.
 
 The way that QGIS draws a circle, or the arc of a circle, is by placing three points and drawing the arc which would connect all three together. Shown in the following examples:
+
 <img src="/images/tutorial/points_and_curves.png" width="400">
 
 To create a full circle, you only need two points: your start point, and its antipodal point (i.e. the diametric opposite of the start point). From here, your "third point" is the start point again. This closes the circle.
-<img src="/images/tutorial/full_circle_generation.gif" width=400>
+
+<img src="/images/tutorial/full_circle_generation_gif.gif" width=400>
 
 In the case of Westport House, the floorplan contains a guide showing the centre of the circle. This can be confirmed with the digitizing tools, as we can see the length of the lines (the _d_ field) from centre to edge are equal:
+
 <img src="/images/tutorial/outline_drawing_4.png" width="400"> <img src="/images/tutorial/curve_distances.png" width="400">
 
 This means that we can generate a third point, the same distance from the centre, and use that to generate an arc or a full circle.
 In the case of our example, we've generated a full circle:
+
 <img src="/images/tutorial/outline_drawing_5.png" width="400">
 
 The initial output of this arc is very detailed - the whole circle in our example is 362 verts.
+
 <img src="/images/tutorial/outline_drawing_6.png" width="400">
 
-While this level of detail might be desired by some, it's overkill for most circumstances. To remedy this, we can use the *Simplify Feature* <img src="/images/tutorial/buttons/simplify_feature.png"> tool to reduce the vert count to something more manageable.
+While this level of detail might be desired by some, it's overkill for most circumstances. To remedy this, we can use the *Simplify Feature* 
+<img src="/images/tutorial/buttons/simplify_feature.png">
+tool to reduce the vert count to something more manageable.
 
 Simply toggle the tool on, then select the feature that you would like to simplify. The popup window will let you see the before and after of the feature's vert count, and allow you to adjust according to taste.
 In this example, we're going to use a value of *0.05* - taking us from 362 verts, to 65.
