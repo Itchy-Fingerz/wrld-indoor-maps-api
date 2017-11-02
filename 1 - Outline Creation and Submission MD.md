@@ -205,7 +205,9 @@ The initial output of this arc is very detailed - the whole circle in our exampl
 <img src="/images/tutorial/outline_drawing_6.png" width="400">
 
 While this level of detail might be desired by some, it's overkill for most circumstances. To remedy this, we can use the *Simplify Feature* 
-<img src="/images/tutorial/buttons/simplify_feature.png">
+
+![Simplify Tool](/images/tutorial/buttons/simplify_feature.png)
+
 tool to reduce the vert count to something more manageable.
 
 Simply toggle the tool on, then select the feature that you would like to simplify. The popup window will let you see the before and after of the feature's vert count, and allow you to adjust according to taste.
