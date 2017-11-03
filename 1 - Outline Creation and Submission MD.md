@@ -2,7 +2,7 @@ Submitting your indoor map to WRLD
 ===================
 If you’re interested in seeing your building’s indoor space in our immersive 3D maps, read on!
 
-This post covers creating an indoor map by georeferencing floor plan imagery and then submitting it to the WRLD indoor maps API. After we've processed your indoor map, you'll receive an email containing details of how to view it using the WRLD SDK.
+This post covers creating an indoor map by georeferencing floorplan imagery and then submitting it to the WRLD indoor maps API. After we've processed your indoor map, you'll receive an email containing details of how to view it using the WRLD SDK.
 
 By default, WRLD will not share your map data. This means that any submitted indoor maps will remain private to you unless you choose to share them.
 
@@ -19,20 +19,21 @@ Please note that if you do not have the building owner’s approval to submit a 
 
 The following is an outline of what this tutorial is going to cover:
 
-1. [Installing the Required Software](#install-software)
-1. [Georeferencing the Floor Plan Image](#georeference-floor-plan)
+1. [Getting Started](#getting-started)
+1. [Georeferencing the Floorplan Image](#georeference-floor-plan)
 1. [Creating A Building Outline](#creating-a-building-outline)
 1. [Exporting the Outline in GeoJSON Format](#export-outline-to-geojson)
 1. [Submitting the Outline to the WRLD Indoor Maps API](#submit-outline)
 
 ---
 
-#### <a name="install-software"/>Installing the Required Software
+#### <a name="getting-started"/>Getting Started
 Pre-requisites:  
 
 - [QGIS](https://www.qgis.org/en/site/forusers/download.html) (At the time of writing, the latest version is 2.18.xx)
 - [curl](https://curl.haxx.se/download.html) (If you're using Mac OS, or Linux, you should have this as standard).
-- A floor plan image (tiff, png, or bitmap) for each of the floors you wish to submit.
+- A floorplan image (for example, a tiff, png, or bitmap) for each of the floors you wish to submit.
+- A WRLD Developer Token - found on your [account page](https://accounts.wrld3d.com/users/edit) - for submission to the service.
 
 **QGIS**  
 (**Note**: Other GIS software packages - such as [ArcMap](http://desktop.arcgis.com/en/arcmap/) - are available)
@@ -44,7 +45,7 @@ After installing, you'll also need to make sure that you have access to the [*Ge
 The Georeferencer plugin can be found under *Raster > Georeferencer*, and the OpenLayers plugin can be found under *Web > OpenLayers Plugin*.
 If you find that either of these plugins are missing, you should be able to find them under *Plugins > Manage and Install Plugins* 
 
-Georeferencer will allow you to convert your indoor floorplan to have it correctly related to a ground system of geographic co-ordinates - i.e. Making your map image spatially fit your building in terms of latlongs. This process is covered in more detail below.
+Georeferencer will allow you to convert your indoor floorplan to have it correctly related to a ground system of geographic co-ordinates - i.e. Making your map image spatially fit your building in terms of latitude and longitude. This process is covered in more detail below.
 
 OpenLayers allows you to pull map & satellite imagery into your QGIS scene. This makes creation of your initial outline much easier (if you're doing it by hand) by allowing you to line up the bounds of your feature with the OpenLayers imagery.
 
@@ -63,10 +64,10 @@ To change it, click the CRS, check the box for _Enable 'on the fly' CRS transfor
 
 ---
 
-#### <a name="georeference-floor-plan"/>Georeferencing the Floor Plan Image
-If you have an image of your building’s floor plan, you can use [georeferencing](https://en.wikipedia.org/wiki/Georeference) to help you create your map. As standard, floorplan images do not contain geographic location data so, while they may be accurate and detailed, there’s nothing to associate the contents of the image with spatial location, or orientation, in the world.  
+#### <a name="georeference-floor-plan"/>Georeferencing the Floorplan Image
+If you have an image of your building’s floorplan, you can use [georeferencing](https://en.wikipedia.org/wiki/Georeference) to help you create your map. As standard, floorplan images do not contain geographic location data so, while they may be accurate and detailed, there’s nothing to associate the contents of the image with spatial location, or orientation, in the world.  
 
-Georeferencing is essentially a way of saying "point **P** of my map image is at geographic coordinate **(a, b)**". Performing this step will allow you to view your floor plan image in QGIS with the correct location and orientation. 
+Georeferencing is essentially a way of saying "point **P** of my map image is at geographic coordinate **(a, b)**". Performing this step will allow you to view your floorplan image in QGIS with the correct location and orientation. 
 
 - Open QGIS and add a layer of your choice via OpenLayers - we've found that QGIS best handles OpenStreetMap (OSM) and Bing Aerial
   - As an example: to add an OSM layer, choose *Web > OpenLayers plugin > OpenStreetMap > OpenStreetMap*
@@ -78,7 +79,7 @@ Georeferencing is essentially a way of saying "point **P** of my map image is at
 </p>
 
 - Click “Add Raster”
-- Select your floor plan image
+- Select your floorplan image
 - The image should be displayed in the Georeferencer window
 
 <p align="center">
@@ -144,6 +145,7 @@ The following image shows an example of this in practice as it displays:
 </p>
 
 To generate this outline, start by creating a line layer via *Layer > Create Layer > New Shapefile Layer...*. This will serve as our "scratch" layer for generating our guiding lines - think of it like a sketch before you draw the main polygons.
+**Note:** QGIS has a "scratch layer" feature, but these are cleared at the end of a session. We use line-type shapefile layers so that they persist throughout sessions and can be used in other projects.
 
 On the New Shapefile Layer popup window, select the *Line* radio button, ensure that your *CRS* is set to *3857* (unless you're specifically using a different CRS) then hit OK.
 Set your file path and line layer name as you see fit - e.g. something like "scratch" or "guide" - and confirm.
