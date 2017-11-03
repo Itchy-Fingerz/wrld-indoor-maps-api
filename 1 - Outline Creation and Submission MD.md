@@ -52,20 +52,21 @@ OpenLayers allows you to pull map & satellite imagery into your QGIS scene. This
 
 Finally, before we get started, set your project **CRS** (**C**oordinate **R**eference **S**ystem) to *WGS84 / Pseudo Mercator ([EPSG: 3857](http://spatialreference.org/ref/sr-org/6864/))* - you can see your current CRS in the bottom right of the QGIS window.
 
-<img src="/images/tutorial/crs_location.png" align="middle">
+<p align="center">
+<img src="/images/tutorial/crs_location.png">
+</p>
 
 To change it, click the CRS, check the box for _Enable 'on the fly' CRS transformation (OTF)_ and enter "3857" in the _Filter_ text field.
 - EPSG:3857 is also referred to as "Web Mercator" as it is the most common projection type for web maps such as Google Maps, Bing Maps, OpenStreetMap, etc
 - This is the CRS that will be used for producing this indoor map, as it shows the world in a way that avoids the stretching and skewing that is present when the map is taking latlong geographic co-ordinates into account.
-- This CRS also allows us to use the *advanced digitization tools* that will be covered in the [Creating An Indoor Map Level](#create-indoor-map-level) section below
+- This CRS also allows us to use the *advanced digitization tools* that will be covered in the [Creating A Building Outline](#creating-a-building-outline) section below
 
 ---
 
 #### <a name="georeference-floor-plan"/>Georeferencing the Floor Plan Image
 If you have an image of your building’s floor plan, you can use [georeferencing](https://en.wikipedia.org/wiki/Georeference) to help you create your map. As standard, floorplan images do not contain geographic location data so, while they may be accurate and detailed, there’s nothing to associate the contents of the image with spatial location, or orientation, in the world.  
 
-[Georeferencing](https://en.wikipedia.org/wiki/Georeference) is essentially a way of saying "point **P** of my map image is at geographic coordinate **Q**"
-Performing this step will allow you to view your floor plan image in QGIS with the correct location and orientation. 
+Georeferencing is essentially a way of saying "point **P** of my map image is at geographic coordinate **Q**". Performing this step will allow you to view your floor plan image in QGIS with the correct location and orientation. 
 
 - Open QGIS and add a layer of your choice via OpenLayers - we've found that QGIS best handles OpenStreetMap (OSM) and Bing Aerial
   - As an example: to add an OSM layer, choose *Web > OpenLayers plugin > OpenStreetMap > OpenStreetMap*
@@ -181,7 +182,7 @@ Thanks to the snapping tools, you'll now be able to correctly connect your next 
 As you can see in the following image, the pink "+" denotes where your new line will connect to the current, with a slightly stronger affinity for the ends.
 
 <p align="center">
-<img src="/images/tutorial/outline_snapping_gif.gif" width=400>
+<img src="/images/tutorial/outline_snapping_gif.gif" width=600>
 </p>
 
 Ensure that the *Enable advanced digitizing tools* button is toggled on, then select the start point of your next line. If it's appropriate (and it *usually* is) you can now use the Advanced Digitizing *Perpendicular* button to create a line at a right-angle to your base line. 
