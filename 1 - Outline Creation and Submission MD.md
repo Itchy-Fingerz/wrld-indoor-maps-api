@@ -66,7 +66,7 @@ To change it, click the CRS, check the box for _Enable 'on the fly' CRS transfor
 #### <a name="georeference-floor-plan"/>Georeferencing the Floor Plan Image
 If you have an image of your building’s floor plan, you can use [georeferencing](https://en.wikipedia.org/wiki/Georeference) to help you create your map. As standard, floorplan images do not contain geographic location data so, while they may be accurate and detailed, there’s nothing to associate the contents of the image with spatial location, or orientation, in the world.  
 
-Georeferencing is essentially a way of saying "point **P** of my map image is at geographic coordinate **Q**". Performing this step will allow you to view your floor plan image in QGIS with the correct location and orientation. 
+Georeferencing is essentially a way of saying "point **P** of my map image is at geographic coordinate **(a, b)**". Performing this step will allow you to view your floor plan image in QGIS with the correct location and orientation. 
 
 - Open QGIS and add a layer of your choice via OpenLayers - we've found that QGIS best handles OpenStreetMap (OSM) and Bing Aerial
   - As an example: to add an OSM layer, choose *Web > OpenLayers plugin > OpenStreetMap > OpenStreetMap*
@@ -82,7 +82,7 @@ Georeferencing is essentially a way of saying "point **P** of my map image is at
 - The image should be displayed in the Georeferencer window
 
 <p align="center">
-<img src="/images/tutorial/georeference_plan_thumb.png">
+<img src="/images/tutorial/georeferenced_plan.png" width="400">
 </p>
 
 The next step is to select a point on the floorplan image, and tell QGIS where that point is placed in the world
