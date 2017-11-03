@@ -1,4 +1,4 @@
-Submitting your indoor map to WRLD
+WRLD Indoor Map Outline Generation and Submission
 ===================
 If you’re interested in seeing your building’s indoor space in our immersive 3D maps, read on!
 
