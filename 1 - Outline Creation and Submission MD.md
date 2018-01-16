@@ -59,7 +59,7 @@ Finally, before we get started, set your project **CRS** (**C**oordinate **R**ef
 To change it, click the CRS, check the box for _Enable 'on the fly' CRS transformation (OTF)_ and enter "3857" in the _Filter_ text field.
 - EPSG:3857 is also referred to as "Web Mercator" as it is the most common projection type for web maps such as Google Maps, Bing Maps, OpenStreetMap, etc
 - This is the CRS that will be used for producing this indoor map, as it shows the world in a way that avoids the stretching and skewing that is present when the map is taking latlong geographic co-ordinates into account.
-- This CRS also allows us to use the *advanced digitization tools* that we refer to in the [Using QGIS](https://github.com/wrld3d/wrld-indoor-maps-api/blob/docs_update/A%20-%20Using%20QGIS) page of this documentation
+- This CRS also allows us to use the *advanced digitization tools* that we refer to in the [Using QGIS](https://github.com/wrld3d/wrld-indoor-maps-api/blob/docs_update/A%20-%20Using%20QGIS.md) page of this documentation
 
 ---
 
@@ -146,7 +146,7 @@ The following image shows an example of this in practice as it displays:
 <img src="/images/tutorial/outline_gen_gif.gif" width=400>
 </p>
 
-If you're unsure about how to generate the polygon for your outline, or would like to see an example of the methods that we use internally, you may find [this documentation](https://github.com/wrld3d/wrld-indoor-maps-api/blob/docs_update/A%20-%20Using%20QGIS) helpful.
+If you're unsure about how to generate the polygon for your outline, or would like to see an example of the methods that we use internally, you may find [this documentation](https://github.com/wrld3d/wrld-indoor-maps-api/blob/docs_update/A%20-%20Using%20QGIS.md) helpful.
 
 In the case of the Westport House example, our final product looks something like this:
 
