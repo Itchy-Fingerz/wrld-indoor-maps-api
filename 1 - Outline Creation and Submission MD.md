@@ -2,12 +2,12 @@ WRLD Indoor Map Outline Generation and Submission
 ===================
 If you’re interested in seeing your building’s indoor space in our immersive 3D maps, read on!
 
-This post covers creating an indoor map by georeferencing floorplan imagery and then submitting it to the WRLD indoor maps API. After we've processed your indoor map, you'll receive an email containing details of how to view it using the WRLD SDK.
+This post covers creating an indoor map claim area by georeferencing floor plan imagery and then submitting it to the WRLD indoor maps API. After we've processed your submitted outline, you'll be able to build your full indoor map and view it using the WRLD SDK.
 
 By default, WRLD will not share your map data. This means that any submitted indoor maps will remain private to you unless you choose to share them.
 
 You can follow along on Windows, Mac OS, or Linux.
-  
+
 | WRLD Indoor Map Format | WRLD 3D Indoor Map |
 |:-----------:|:------------:|
 |![Indoor map source data](/images/tutorial/overview_coloured.png)|![Indoor map in app](/images/tutorial/overview.png)|
@@ -20,8 +20,7 @@ Please note that if you do not have the building owner’s approval to submit a 
 The following is an outline of what this tutorial is going to cover:
 
 1. [Getting Started](#getting-started)
-1. [Georeferencing the Floorplan Image](#georeference-floor-plan)
-1. [Creating A Building Outline](#creating-a-building-outline)
+1. [Georeferencing the Floor Plan Image](#georeference-floor-plan)
 1. [Exporting the Outline in GeoJSON Format](#export-outline-to-geojson)
 1. [Submitting the Outline to the WRLD Indoor Maps API](#submit-outline)
 
@@ -32,7 +31,7 @@ Pre-requisites:
 
 - [QGIS](https://www.qgis.org/en/site/forusers/download.html) (At the time of writing, the latest version is 2.18.xx)
 - [curl](https://curl.haxx.se/download.html) (If you're using Mac OS, or Linux, you should have this as standard).
-- A floorplan image (for example, a tiff, png, or bitmap) for each of the floors you wish to submit.
+- A floor plan image (for example, a tiff, png, or bitmap) for each of the floors you wish to submit.
 - A WRLD Developer Token - found on your [account page](https://accounts.wrld3d.com/users/edit) - for submission to the service.
 
 **QGIS**  
@@ -45,11 +44,11 @@ After installing, you'll also need to make sure that you have access to the [*Ge
 The Georeferencer plugin can be found under *Raster > Georeferencer*, and the OpenLayers plugin can be found under *Web > OpenLayers Plugin*.
 If you find that either of these plugins are missing, you should be able to find them under *Plugins > Manage and Install Plugins* 
 
-Georeferencer will allow you to convert your indoor floorplan to have it correctly related to a ground system of geographic co-ordinates - i.e. Making your map image spatially fit your building in terms of latitude and longitude. This process is covered in more detail below.
+Georeferencer will allow you to convert your indoor floor plan to have it correctly related to a ground system of geographic co-ordinates - i.e. Making your floor plan image spatially correct to your building in terms of latitude and longitude. This process is covered in more detail below.
 
 OpenLayers allows you to pull map & satellite imagery into your QGIS scene. This makes creation of your initial outline much easier (if you're doing it by hand) by allowing you to line up the bounds of your feature with the OpenLayers imagery.
 
-(**Note**: For more advanced users, or for those accustomed to GIS packages, if you have access to useful data such as a shapefile of the building, you can feel free to use these as they’ll likely be more accurate than the OpenLayers data.
+(**Note**: For advanced users accustomed to GIS packages, if you have access to useful data, such as a shapefile for the building, you can feel free to use these as they’ll likely be more accurate than the OpenLayers data.)
 
 Finally, before we get started, set your project **CRS** (**C**oordinate **R**eference **S**ystem) to *WGS84 / Pseudo Mercator ([EPSG: 3857](http://spatialreference.org/ref/sr-org/6864/))* - you can see your current CRS in the bottom right of the QGIS window.
 
@@ -60,14 +59,14 @@ Finally, before we get started, set your project **CRS** (**C**oordinate **R**ef
 To change it, click the CRS, check the box for _Enable 'on the fly' CRS transformation (OTF)_ and enter "3857" in the _Filter_ text field.
 - EPSG:3857 is also referred to as "Web Mercator" as it is the most common projection type for web maps such as Google Maps, Bing Maps, OpenStreetMap, etc
 - This is the CRS that will be used for producing this indoor map, as it shows the world in a way that avoids the stretching and skewing that is present when the map is taking latlong geographic co-ordinates into account.
-- This CRS also allows us to use the *advanced digitization tools* that will be covered in the [Creating A Building Outline](#creating-a-building-outline) section below
+- This CRS also allows us to use the *advanced digitization tools* that we refer to in the [Using QGIS](https://github.com/wrld3d/wrld-indoor-maps-api/blob/docs_update/A%20-%20Using%20QGIS) page of this documentation
 
 ---
 
-#### <a name="georeference-floor-plan"/>Georeferencing the Floorplan Image
-If you have an image of your building’s floorplan, you can use [georeferencing](https://en.wikipedia.org/wiki/Georeference) to help you create your map. As standard, floorplan images do not contain geographic location data so, while they may be accurate and detailed, there’s nothing to associate the contents of the image with spatial location, or orientation, in the world.  
+#### <a name="georeference-floor-plan"/>Georeferencing the Floor Plan Image
+If you have an image of your building’s floor plan, you can use [georeferencing](https://en.wikipedia.org/wiki/Georeference) to help you create your map. As standard, floor plan images do not contain geographic location data so, while they may be accurate and detailed, there’s nothing to associate the contents of the image with spatial location, or orientation, in the world.   
 
-Georeferencing is essentially a way of saying "point **P** of my map image is at geographic coordinate **(a, b)**". Performing this step will allow you to view your floorplan image in QGIS with the correct location and orientation. 
+Georeferencing is essentially a way of saying "point **P** of my map image is at geographic coordinate **(a, b)**". Performing this step will allow you to view your floor plan image in QGIS with the correct location and orientation. 
 
 - Open QGIS and add a layer of your choice via OpenLayers - we've found that QGIS best handles OpenStreetMap (OSM) and Bing Aerial
   - As an example: to add an OSM layer, choose *Web > OpenLayers plugin > OpenStreetMap > OpenStreetMap*
@@ -79,14 +78,14 @@ Georeferencing is essentially a way of saying "point **P** of my map image is at
 </p>
 
 - Click “Add Raster”
-- Select your floorplan image
+- Select your floor plan image
 - The image should be displayed in the Georeferencer window
 
 <p align="center">
 <img src="/images/tutorial/georeferenced_plan.png" width="400">
 </p>
 
-The next step is to select a point on the floorplan image, and tell QGIS where that point is placed in the world
+The next step is to select a point on the floor plan image, and tell QGIS where that point is placed in the world
  
 - In the Georeferencer window, ensure the “Add Point” tool is selected, and left click the first point to be referenced (a corner is usually a good choice)
 - When the *Enter map coordinates* window appears, click the “From map canvas” button
@@ -105,8 +104,8 @@ The next step is to select a point on the floorplan image, and tell QGIS where t
 </p>
 
 - Inaccurately placed georeference points can lead to distortion of the map, meaning that walls can be the wrong length, or at incorrect angles
-- Additionally, each time a point is added, it has potential to skew the floorplan's appearance when it's overlaid on the map
-- The ideal scenario is that you can use three well spread points and have the rest of the floorplan line up correctly. Only three points were used in the above example
+- Additionally, each time a point is added, it has potential to skew the floor plan's appearance when it's overlaid on the map
+- The ideal scenario is that you can use three well spread points and have the rest of the floor plan line up correctly. Only three points were used in the above example
 - Open the *Transformation Settings* window, and set a file name and path for the *Output raster*
 - Set the *Target SRS* to the QGIS project's CRS (should be EPSG:3857)
 - Ensure that *Load in QGIS when done* is checked
@@ -125,14 +124,17 @@ The next step is to select a point on the floorplan image, and tell QGIS where t
 </p>
 
 - Now that this image has been completed and saved out to a file, you can re-use it in another QGIS project, if needed, by just dragging the georeferenced .tiff file into QGIS
-- In the QGIS *Layers* panel (found to the left of the main map window by default), locate the raster layer that has just been added. *Right click > Properties > Transparency* will allow the editing of the floorplan transparency and let you see the underlying map to make sure that the floorplan image is correctly aligned.
+- In the QGIS *Layers* panel (found to the left of the main map window by default), locate the raster layer that has just been added. *Right click > Properties > Transparency* will allow the editing of the floor plan transparency and let you see the underlying map to make sure that the floor plan image is correctly aligned.
 
 ---
 
 #### <a name="create-indoor-outline"/>Creating A Building Outline
 
-Now that you have a georeferenced floorplan image, you're ready to "claim" the area of the map which contains your building. We refer to this space as the building "outline".
-The outline for your building should contain any and all of your indoor map features.
+Now that you have a georeferenced floor plan image, you're ready to "claim" the area of the map which contains your building. We refer to this space as the building "outline".
+
+This outline provides the area of the WRLD building data that will be cleared out when you view the 
+interior on our maps, and can also serve as the basis for adding all of the interior features that you want to view.
+As such, the extents of your building outline should be able to contain any and all of your indoor map features.
 For example, if a feature on floor 2 extends beyond the bounds of floor 1, you should add that outcropping to your outline.
 The following image shows an example of this in practice as it displays: 
 
@@ -144,157 +146,15 @@ The following image shows an example of this in practice as it displays:
 <img src="/images/tutorial/outline_gen_gif.gif" width=400>
 </p>
 
-To generate this outline, start by creating a line layer via *Layer > Create Layer > New Shapefile Layer...*. This will serve as our "scratch" layer for generating our guiding lines - think of it like a sketch before you draw the main polygons.
-**Note:** QGIS has a "scratch layer" feature, but these are cleared at the end of a session. We use line-type shapefile layers so that they persist throughout sessions and can be used in other projects.
+If you're unsure about how to generate the polygon for your outline, or would like to see an example of the methods that we use internally, you may find [this documentation](https://github.com/wrld3d/wrld-indoor-maps-api/blob/docs_update/A%20-%20Using%20QGIS) helpful.
 
-On the New Shapefile Layer popup window, select the *Line* radio button, ensure that your *CRS* is set to *3857* (unless you're specifically using a different CRS) then hit OK.
-Set your file path and line layer name as you see fit - e.g. something like "scratch" or "guide" - and confirm.
-Your new line layer should now be present in the *Layers* panel on the left of the window.
-Click and drag this layer to the top of the list, to ensure that it will be visible over our other layers.
-Using *Right click > Properties > Style* you can change the colour of this layer to make sure it's visible - bright red or green tend to work well.
-
-With your scratch layer set up, you can begin to draw the guide lines for your outline's perimeter.
-
-- Click the “Toggle Editing” button <img src="/images/tutorial/buttons/edit_toggle.png">
-
-- Click the “Add Features” button <img src="/images/tutorial/buttons/line_add_feature.png">
-
-- We also use the *Snapping Tool* and *Advanced Digitizing Panel* to ensure that we can make points accurate, and keep walls parallel and perpendicular to one another, where appropriate.
-- Set the snapping parameters via *Settings > Snapping Options...*
-- More often that not, our settings are something similar to the following: 
+In the case of the Westport House example, our final product looks something like this:
 
 <p align="center">
-<img src="/images/tutorial/snapping_panel.png" width=400>
+<img src="images/tutorial/outline_drawing_8.png" width=250><img src="/images/tutorial/outline_drawing_10.png" width=250><img src="/images/tutorial/outline_drawing_11.png" width=250>
 </p>
 
-- These settings ensure that your can snap to any corner or edge on any active layer, including those that you're not currently working on (which will be important later).
-
-- Ensure that Advanced Digitizing is active via *View > Toolbars > Advanced Digitizing Toolbar*
-- You may notice that there's a new button available while your layer is in edit mode: the *Enable advanced digitizing tools* button. <img src="/images/tutorial/buttons/digitization_toggle.png">
-
-Your first line is going to be your "base line" - i.e. the source line for keeping your walls and rooms parallel and perpendicular to one another - so having it be along one of your larger walls is usually the best approach.
-
-As with your georeference, it's usually a good idea to start from a corner, and aim for another adjacent corner. For example, in our Westport House trace, the first line we used was the following:
-
-<p align="center">
-<img src="/images/tutorial/outline_drawing_1.png" width="400" />
-</p>
-
-Thanks to the snapping tools, you'll now be able to correctly connect your next line to your base line.
-As you can see in the following image, the pink "+" denotes where your new line will connect to the current, with a slightly stronger affinity for the ends.
-
-<p align="center">
-<img src="/images/tutorial/outline_snapping_gif.gif" width=600>
-</p>
-
-Ensure that the *Enable advanced digitizing tools* button is toggled on, then select the start point of your next line. If it's appropriate (and it *usually* is) you can now use the Advanced Digitizing *Perpendicular* button to create a line at a right-angle to your base line. 
-After clicking the button, you simply select the line that you would like to draw perpendicular to. 
-When placing the end point of your line, you'll be left with a right-angled corner!
-
-<p align="center">
-<img src="/images/tutorial/outline_perpendicular_gif.gif" width=400>
-</p>
-
-The button just next to *Perpendicular* is *Parallel* and will, as you might expect, let you select a line that you can draw parallel to.
-
-<p align="center">
-<img src="/images/tutorial/outline_parallel_gif.gif" width=400>
-</p>
-
-Using the perpendicular digitizing tool to draw our next line leaves us looking something like this:
-
-<p align="center">
-<img src="/images/tutorial/outline_drawing_2.png" width="400">
-</p>
-
-With all of this in mind, completing _most_ of the outline for Westport House looks something like this:
-
-<p align="center">
-<img src="/images/tutorial/outline_drawing_3.png" width="400">
-</p>
-
----
-
-As you can see, there's a section to the bottom right - the curved balcony - that we haven't outlined yet.
-We'll cover how to draw curves and circles now.
-
-The way that QGIS draws a circle, or the arc of a circle, is by placing three points and drawing the arc which would connect all three together. Shown in the following examples:
-
-<p align="center">
-<img src="/images/tutorial/points_and_curves.png" width="400">
-</p>
-
-To create a full circle, you only need two points: your start point, and its antipodal point (i.e. the diametric opposite of the start point). From here, your "third point" is the start point again. This closes the circle.
-
-<p align="center">
-<img src="/images/tutorial/full_circle_generation_gif.gif" width=400>
-</p>
-
-In the case of Westport House, the floorplan contains a guide showing the centre of the circle. This can be confirmed with the digitizing tools, as we can see the length of the lines (the _d_ field) from centre to edge are equal:
-
-<p align="center">
-<img src="/images/tutorial/outline_drawing_4.png" width="400"> <img src="/images/tutorial/curve_distances.png" width="400">
-</p>
-
-This means that we can generate a third point, the same distance from the centre, and use that to generate an arc or a full circle.
-In the case of our example, we've generated a full circle:
-
-<p align="center">
-<img src="/images/tutorial/outline_drawing_5.png" width="400">
-</p>
-
-The initial output of this arc is very detailed - the whole circle in our example is 362 verts.
-
-<p align="center">
-<img src="/images/tutorial/outline_drawing_6.png" width="400">
-</p>
-
-While this level of detail might be desired by some, it's overkill for most circumstances. To remedy this, we can use the *Simplify Feature* <img src="/images/tutorial/buttons/simplify_feature.png"> tool to reduce the vert count to something more manageable.
-
-Simply toggle the tool on, then select the feature that you would like to simplify. The popup window will let you see the before and after of the feature's vert count, and allow you to adjust according to taste.
-In this example, we're going to use a value of *0.05* - taking us from 362 verts, to 65.
-
-<p align="center">
-<img src="/images/tutorial/outline_drawing_7.png" width="400">
-</p>
-
----
-
-With all of these guides in place, we're now at a point where we can generate our outline polygon for submission!
-
-<p align="center">
-<img src="/images/tutorial/outline_drawing_8.png" width="400">
-</p>
-
-As before, create a new shapefile layer (*Layer > Create Layer > New Shapefile Layer...*) but this time make sure that the *Type* is set to the *Polygon* radio button. 
-In the *New field* section of the window, enter "name" in the *Name* box, ensure that *Type* is set to *Text Data* and that *Length* is 80, and click *Add to fields list*.
-Then repeat the above for a "type" text data field.
-
-Your window should now look something like this:
-
-<p align="center">
-<img src="/images/tutorial/outline_drawing_9.png" width="400">
-</p>
-
-Click *OK*, set your file path and line layer name as you see fit - we're using *building_outline* - and save.
-You'll now have a new polygon layer in your project.
-To create the actual building polygon you can essentially just "join the dots" of your guide layer.
-Select the *Add Feature* tool: <img src="/images/tutorial/buttons/polygon_add_feature.png">
-
-Then just start selecting the appropriate outline points from your guide layer.
-
-<p align="center">
-<img src="/images/tutorial/outline_polygon_generation_gif.gif" width="400">
-</p>
-
-When you've finished, you should have something like this:
-
-<p align="center">
-<img src="/images/tutorial/outline_drawing_10.png" width="400"> <img src="/images/tutorial/outline_drawing_11.png" width="400">
-</p>
-
-Congratulations! You're now ready to submit your claim outline to the indoor maps service.
-This outline will be the section of the WRLD building data that will be cleared out when you view the interior on our maps, and can serve as the basis for adding all of the interior features that you want to view.
+From here, you're now ready to submit your claim outline to the indoor maps service.
 
 ---
 
@@ -311,21 +171,22 @@ In doing this, we can also convert the format from *Pseudo-Mercator* to *Mercato
 - Set your file name and location
 - Click *OK*
 
-#### <a name="#submit-outline"/>Submitting the Outline to the WRLD Indoor Maps API
+#### <a name="submit-outline"/>Submitting the Outline to the WRLD Indoor Maps API
 
 To submit to our REST API via a curl command, you'll need your WRLD developer token (which you can find [here](https://accounts.wrld3d.com/users/edit))
 
-You'll then need to fill in the following information, for everything contained within a pair of <>, as appropriate to your submission:
+You'll then need to fill in the following information, replacing everything marked by a pair of chevrons (<>) including the chevrons themselves, as appropriate to your submission (i.e. "&lt;my venue phone no.&gt;" would be replaced by "+441382555555"):
 
 ```sh
 $ curl -v -XPOST https://indoor-maps-api.wrld3d.com/v1/edits/?token=<my developer token> -F name="<my venue name>" -F venue_street_address="<my venue address>" -F venue_phone_number="<my venue phone no.>" -F venue_email="<my venue owner email address>" -F submission_contact_email="<my email address for notifications>" -F venue_outline="@</path/to/my/file>.geojson"
 ```
 
-On successful completion of this request, you should receive a reply email which contains a 40-character [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier) in the format *EIM-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx*. Please make note of this UUID, as you'll need it for any future updates or submissions to your indoor map.
+On successful completion of this request, you should receive a reply email which contains a 40-character [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier) in the format *EIM-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx*. Please make note of this UUID, as you'll need it for any future submissions or updates to your indoor map.
 
 ---
 
 The indoor maps API will now validate your outline and move your edit from the *AwaitingApproval* state to the *ApprovedForSubmission* state.  This should happen within a few minutes.  You will be e-mailed if any problems arise during this process.  Alternatively, you can also query the status of the edit with the following command (you’ll need to replace the UUID shown here with the one that was returned by your initial POST request):
+
 ```sh
 $ curl -v https://indoor-maps-api.wrld3d.com/v1/edits/<my UUID>/status?token=<my developer token>
 ```
