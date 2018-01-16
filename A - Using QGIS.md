@@ -150,7 +150,7 @@ Your window should now look something like this:
 <img src="/images/tutorial/outline_drawing_9.png" width="400">
 </p>
 
-Click *OK*, set your file path and line layer name as you see fit - we're using *building_outline* - and save.
+Click *OK*, set your file path and outline polygon layer name as you see fit - we're using *building_outline* - and save.
 You'll now have a new polygon layer in your project.
 To create the actual building polygon you can essentially just "join the dots" of your guide layer.
 Select the *Add Feature* tool: ![Add Polygon Feature](/images/tutorial/buttons/polygon_add_feature.png)
